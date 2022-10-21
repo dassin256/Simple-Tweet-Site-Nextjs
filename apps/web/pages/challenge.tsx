@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Button,
   Box,
@@ -40,7 +40,7 @@ export default function Challenge() {
       return;
     }
     setTweetList((prev) => {
-      return [
+      const arr = [
         ...prev,
         {
           owner: me,
@@ -48,6 +48,8 @@ export default function Challenge() {
           datetime: new Date().toString(),
         },
       ];
+      localStorage.setItem("mytweets", JSON.stringify(arr));
+      return arr;
     });
     setInvalidMessage("");
     messageRef.current.value = "";
@@ -87,6 +89,13 @@ export default function Challenge() {
     );
   }
 
+  setInterval(() => {
+    setTweetList((prev) => prev);
+  }, 60000);
+
+  useEffect(() => {
+    setTweetList(JSON.parse(localStorage.getItem("mytweets") || "[]"));
+  }, []);
   return (
     <ThemeProvider theme={themes[currentTheme]}>
       <Flex
