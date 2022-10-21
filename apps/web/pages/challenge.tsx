@@ -20,6 +20,7 @@ type AvailableThemes = keyof typeof themes;
 export default function Challenge() {
   const me: string = "Human"; // load user name
   const messageRef = useRef();
+  const [invalidMessage, setInvalidMessage] = useState("");
   const [tweetList, setTweetList] = useState<Tweet[]>([]); // load the tweet history
 
   const defaultTheme: AvailableThemes = "nineties";
@@ -30,6 +31,14 @@ export default function Challenge() {
     e.preventDefault();
     if (!me) return;
     const message = messageRef.current.value;
+    if (!message) {
+      setInvalidMessage("Please input message.");
+      return;
+    }
+    if (message.length > 140) {
+      setInvalidMessage("The body of 140 characters is unreadable");
+      return;
+    }
     setTweetList((prev) => {
       return [
         ...prev,
@@ -40,6 +49,7 @@ export default function Challenge() {
         },
       ];
     });
+    setInvalidMessage("");
     messageRef.current.value = "";
   };
 
@@ -90,7 +100,10 @@ export default function Challenge() {
           <Card sx={{ p: 4 }}>
             <Heading as="h1">Welcome back, {me}!</Heading>
             <form onSubmit={handleSubmit}>
-              <Box mt={4}>
+              <Box mt={4} sx={{ color: "red" }}>
+                {invalidMessage}
+              </Box>
+              <Box mt={2}>
                 <Input ref={messageRef} placeholder="What's happening? " />
                 <Button mt={2}>Tweet</Button>
               </Box>
