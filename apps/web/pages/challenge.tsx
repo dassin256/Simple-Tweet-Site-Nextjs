@@ -117,7 +117,18 @@ export default function Challenge() {
               </Box>
               <Box mt={2}>
                 <Input ref={messageRef} placeholder="What's happening? " />
-                <Button mt={2}>Tweet</Button>
+                <Flex mt={2} sx={{ justifyContent: "space-between" }}>
+                  <Button mt={2}>Tweet</Button>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      localStorage.removeItem("mytweets");
+                      setTweetList([]);
+                    }}
+                  >
+                    reset
+                  </Button>
+                </Flex>
               </Box>
             </form>
             <Heading as="h5" mt={4} mb={2}>
