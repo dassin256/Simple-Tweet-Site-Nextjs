@@ -1,10 +1,12 @@
-import base from "./base"
+import base from "./base";
 
-import modern from "./modern"
-import nineties from "./nineties"
+import modern from "./modern";
+import nineties from "./nineties";
+import classic from "./classic";
 
 export default {
   base,
   modern,
-  nineties
-}
+  classic,
+  nineties,
+};
