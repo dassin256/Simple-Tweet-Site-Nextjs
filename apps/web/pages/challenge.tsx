@@ -131,9 +131,11 @@ export default function Challenge() {
         </Box>
 
         <Box sx={{ width: "66%" }}>
-          {tweetList.map((tweet: Tweet, index: number) =>
-            renderTweet(tweet, index)
-          )}
+          {tweetList
+            .sort((a, b) => {
+              return new Date(b.datetime) - new Date(a.datetime);
+            })
+            .map((tweet: Tweet, index: number) => renderTweet(tweet, index))}
         </Box>
       </Flex>
     </ThemeProvider>
