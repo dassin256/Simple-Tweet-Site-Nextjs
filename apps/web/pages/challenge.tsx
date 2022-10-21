@@ -123,9 +123,17 @@ export default function Challenge() {
             <Heading as="h5" mt={4} mb={2}>
               Theme switcher
             </Heading>
-            <Button onClick={() => setCurrentTheme("modern")}>Modern</Button>
-            <Button onClick={() => setCurrentTheme("nineties")} ml={2}>
-              90s
+            <Flex
+              mt={10}
+              sx={{ alignItems: "center", justifyContent: "space-between" }}
+            >
+              <Button onClick={() => setCurrentTheme("modern")}>Modern</Button>
+              <Button onClick={() => setCurrentTheme("nineties")} ml={2}>
+                90s
+              </Button>
+            </Flex>
+            <Button mt={10} onClick={() => setCurrentTheme("classic")}>
+              classic
             </Button>
           </Card>
         </Box>
