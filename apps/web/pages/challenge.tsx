@@ -95,6 +95,9 @@ export default function Challenge() {
 
   useEffect(() => {
     setTweetList(JSON.parse(localStorage.getItem("mytweets") || "[]"));
+    setInterval(() => {
+      setTweetList((prev) => prev);
+    }, 60000);
   }, []);
   return (
     <ThemeProvider theme={themes[currentTheme]}>
